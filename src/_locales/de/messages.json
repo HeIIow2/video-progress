@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Video Progress",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Speichert, wie weit in einem Video geschaut wurde in den Cookies.",
+    "description": "Description of the extension."
+  },
+  "version": {
+    "message": "Version",
+    "description": "Version"
+  }
+}

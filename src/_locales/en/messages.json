@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Video Progress",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Saves, how long a video has been watched in the browser Cookies.",
+    "description": "Description of the extension."
+  },
+  "version": {
+    "message": "Version",
+    "description": "Version"
+  }
+}

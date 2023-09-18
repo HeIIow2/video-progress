@@ -1,0 +1,16 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": ["cookies", "<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["saveVideoPlayback.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": ["assets/javascripts/helpers/*"]
+}
