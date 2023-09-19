@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 448 512"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.92187498"
+     inkscape:cx="408.94916"
+     inkscape:cy="203.38983"
+     inkscape:window-width="1870"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     showguides="true">
+    <sodipodi:guide
+       position="224,512"
+       orientation="1,0"
+       id="guide2391"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="16,208"
+       orientation="0,-1"
+       id="guide2393"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="144,480"
+       orientation="1,0"
+       id="guide2395"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="355.7,369"
+       orientation="1,0"
+       id="guide2397"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+  <path
+     id="path2"
+     d="M 176 0 C 158.30002 0 144 14.300018 144 32 C 144 49.699982 158.30002 64 176 64 L 192 64 L 192 98.400391 C 92.3001 113.80038 16 200.0001 16 304 C 16 418.89989 109.10011 512 224 512 C 338.89989 512 432 418.89989 432 304 C 432 262.20004 419.69998 223.30075 398.5 190.80078 L 422.59961 166.69922 C 435.0996 154.19923 435.0996 133.90038 422.59961 121.40039 C 410.09962 108.9004 389.80077 108.9004 377.30078 121.40039 L 355.69922 143 C 327.59925 120.00002 293.49996 104.20038 256 98.400391 L 256 64 L 272 64 C 289.69998 64 304 49.699982 304 32 C 304 14.300018 289.69998 0 272 0 L 224 0 L 176 0 z M 170.9375 180.48047 C 175.56154 180.56317 180.1645 181.85877 184.24414 184.36719 L 343.01953 281.39648 C 350.90312 286.248 355.69922 294.73813 355.69922 304 C 355.69922 313.26183 350.90312 321.80722 343.01953 326.60352 L 184.24414 423.63281 C 176.08487 428.59453 165.83244 428.81496 157.50781 424.12891 C 149.18314 419.44282 144 410.62195 144 401.0293 L 144 206.9707 C 144 197.37807 149.18314 188.55716 157.50781 183.87109 C 161.67013 181.52806 166.31346 180.39777 170.9375 180.48047 z " />
+</svg>
