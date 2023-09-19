@@ -22,13 +22,23 @@ function getCookie(key) {
 
 
 function parseUrl(url) {
-    const parsed = new URL(url);
-    return parsed.host + "/" + parsed.pathname + "/?" + parsed.search
+    let parsed = undefined;
+    
+    try {
+        parsed = new URL(url);
+    } catch (error) {
+        return url;
+    }
+
+    return parsed.host + "/" + parsed.pathname + "/?" + parsed.search;
 }
 
 
 function loadTime(videoElement) {
-    const currentTime = getCookie(parseUrl(videoElement.src));
+    const hashedUrl = parseUrl(videoElement.src);
+    if (!hashedUrl) console.error(videoElement);
+
+    const currentTime = getCookie(hashedUrl);
     if (currentTime === null) return;
 
     console.log(`Found the time ${currentTime} for the video "${videoElement.src}".`)
@@ -43,6 +53,8 @@ function setTime(event) {
 
 
 document.querySelectorAll("video, audio").forEach(videoElement => {
+    if (!parseUrl(videoElement.src)) return;
+
     loadTime(videoElement);
     videoElement.addEventListener("timeupdate", setTime);
 });
