@@ -3,6 +3,18 @@
     "message": "Video Progress",
     "description": "Name of the extension."
   },
+  "extensionNameFirst": {
+    "message": "Video",
+    "description": "First part of the extention name."
+  },
+  "extensionNameSecond": {
+    "message": "Progress",
+    "description": "Second part of the extention name."
+  },
+  "disableDebug": {
+    "message": "Debug",
+    "description": "Toggle more extensive debug message."
+  },
   "extensionDescription": {
     "message": "Speichert, wie weit in einem Video geschaut wurde in den Cookies.",
     "description": "Description of the extension."

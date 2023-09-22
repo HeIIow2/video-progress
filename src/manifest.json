@@ -10,8 +10,13 @@
     "48": "assets/images/icon48.png",
     "128": "assets/images/icon128.png"
   },
+  "background": {
+      "page": "pages/background/background.html",
+      "persistent": true
+  },
   "browser_action": {
     "default_title": "Video Progress",
+    "default_popup": "pages/popup/popup.html",
     "default_icon": {
       "16": "assets/images/icon16.png",
       "32": "assets/images/icon32.png",
@@ -19,12 +24,11 @@
       "128": "assets/images/icon128.png"
     }
   },
-  "permissions": ["cookies", "<all_urls>"],
+  "permissions": ["cookies", "<all_urls>", "storage", "activeTab", "nativeMessaging"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["saveVideoPlayback.js"],
-      "run_at": "document_idle"
+      "js": ["pages/content/getVideoElements.js"]
     }
   ],
   "web_accessible_resources": ["assets/javascripts/helpers/*"]

@@ -1,3 +1,5 @@
+console.log("hippies");
+
 function setCookie(key, value) {
     const oneWeekFromNow = new Date();
     oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7); // Add 7 days
