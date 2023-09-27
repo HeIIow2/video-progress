@@ -1,9 +1,8 @@
-const initialized_urls = {}
-
 window.browser = window.browser || window.chrome;
+const storage = chrome.storage.local;
 
 
-function loadTime(request) {
+async function loadTime(request, sendResponse) {
   const response = {
     success: false
   };
@@ -11,21 +10,19 @@ function loadTime(request) {
   const source = parseUrl(request.src);
   if (!source) {
     response.success = false;
-    return response;
+    sendResponse(response);
   }
 
-
-  browser.storage.sync.get([source], (result) => {
-    console.log(result)
-    if (result[source]) {
+  chrome.storage.local.get([source], function(r) {
+    if (r[source]) {
       response.success = true;
-      response.time = result[source];
-    } else {
-      response.success = false;
+      response.time = r[source];
     }
-  })
 
-  return response;
+    sendResponse(response);
+  });
+
+
 }
 
 function saveTime(request) {
@@ -39,9 +36,11 @@ function saveTime(request) {
     return response;
   }
 
-  browser.storage.sync.set({
-    source: response.currentTime 
-  });
+  console.log(request.currentTime )
+  console.log(request)
+  const tempObj = {};
+  tempObj[source] = request.currentTime
+  chrome.storage.local.set(tempObj);
 
   return response;
 }
@@ -75,13 +74,58 @@ function parseUrl(url) {
   return parsed.toString();
 }
 
+
+async function getStoredValue(key) {
+  const res = await new Promise((resolve, reject) => {
+      storage.get([key], (result) => {
+        console.log(result)
+        console.log(result[key])
+        resolve(result[key]);
+      });
+  });
+  console.log("in await", res)
+  return res;
+}
+
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log(message)
+  console.log(message);
+
+  const response = {
+    success: false
+  };
+
+  const source = parseUrl(message.src);
+  if (!source) {
+    console.log(response);
+    sendResponse(response);
+    return;
+  }
 
   if (message.action === "save") {
     sendResponse(saveTime(message))
   }
   else if (message.action === "load") {
-    sendResponse(loadTime(message));
+    try {
+      console.log(sendResponse);
+      // sendResponse(response)
+      
+      response.time = getStoredValue(source);
+      console.log(response)
+      response.success = true;
+    } catch (error) {
+      response.success = false;
+    }
+    sendResponse(response)
+  }
+});
+
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    console.log(
+      `Storage key "${key}" in namespace "${namespace}" changed.`,
+      `Old value was "${oldValue}", new value is "${newValue}".`
+    );
   }
 });

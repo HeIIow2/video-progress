@@ -14,19 +14,38 @@ HTMLVideoElement.prototype.play = function() {
     this.videoPlay();
 }
 
+
+async function sendMessageAsync(message) {
+    return await chrome.runtime.sendMessage(message, (response) => {
+        resolve(response);
+        });
+    // });
+}
+
+
 function sendElement(action, mediaElement) {
-    chrome.runtime.sendMessage({
+    let src = mediaElement.src;
+    if (src == "") {
+        var source = mediaElement.querySelector("source");
+        if (source) src = source.src;
+    }
+
+    if (!src) return;
+
+    const message = {
         "action": action,
-        "src": mediaElement.src,
+        "src": src,
         "currentTime": mediaElement.currentTime,
         "duration": mediaElement.duration,
         "ended": mediaElement.ended,
-    }, 
-    (response) => {
-        console.log(response)
+    };
+
+    chrome.runtime.sendMessage(message, (response) => {
+        console.log("response", response);
+        
         if (!response) return;
         if (!response.success) return;
-
+    
         if (action === "load") {
             console.log(response)
             mediaElement.currentTime = response.time;

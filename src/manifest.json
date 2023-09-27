@@ -24,7 +24,7 @@
       "128": "assets/images/icon128.png"
     }
   },
-  "permissions": ["cookies", "<all_urls>", "storage", "activeTab", "nativeMessaging"],
+  "permissions": ["cookies", "<all_urls>", "storage", "activeTab", "tabs", "nativeMessaging"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
