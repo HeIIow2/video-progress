@@ -1,4 +1,5 @@
 console.log("monkeypatching audio and video play");
+const debug = false;
 
 const audioPlay = HTMLAudioElement.prototype.play
 HTMLAudioElement.prototype.actualPlay = audioPlay;
@@ -42,7 +43,7 @@ function sendElement(action, mediaElement) {
     };
 
     chrome.runtime.sendMessage(message, (response) => {
-        console.log(response);
+        if (debug) console.log(response);
         
         if (!response) return;
         if (!response.success) return;

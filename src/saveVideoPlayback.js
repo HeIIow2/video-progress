@@ -1,4 +1,4 @@
-console.log("hippies");
+const debug = false;
 
 function setCookie(key, value) {
     const oneWeekFromNow = new Date();
@@ -43,7 +43,7 @@ function loadTime(videoElement) {
     const currentTime = getCookie(hashedUrl);
     if (currentTime === null) return;
 
-    console.log(`Found the time ${currentTime} for the video "${videoElement.src}".`)
+    if (debug) console.log(`Found the time ${currentTime} for the video "${videoElement.src}".`);
     videoElement.currentTime = parseFloat(currentTime);
 }
 
