@@ -1,6 +1,6 @@
 window.browser = window.browser || window.chrome;
-const crossStorage = browser.storage ||  chrome.storage;
-const storageMethod = crossStorage.sync;
+const crossStorage = chrome.storage || browser.storage;
+const storageMethod = crossStorage.local;
 
 
 function saveTime(request) {
@@ -14,8 +14,6 @@ function saveTime(request) {
     return response;
   }
 
-  console.log(request.currentTime )
-  console.log(request)
   const tempObj = {};
   tempObj[source] = request.currentTime
   storageMethod.set(tempObj);
@@ -63,21 +61,34 @@ function getStorageValuePromise(key) {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log(message);
 
+  const oldSendResponse = sendResponse;
+  sendResponse = (r) => {
+    console.log("response", r);
+    oldSendResponse(r);
+  }
+
   const response = {
-    success: false
+    success: false,
+    message: ""
   };
 
   // error
   const source = parseUrl(message.src);
   if (!source) {
-    console.log(response);
+    response.message = "Could not parse the media url."
     sendResponse(response);
     return false;
   }
 
   // saving synchronously
   if (message.action === "save") {
-    sendResponse(saveTime(message));
+    const tempObj = {};
+    tempObj[source] = message.currentTime
+    storageMethod.set(tempObj);
+    
+    response.success = true;
+
+    sendResponse(response);
     return false;
   }
 
@@ -88,6 +99,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (source in res) {
         response.time = res[source];
         response.success = true;
+      } else {
+        console.log(res);
+        response.message = `Could not find the source ${source} in the storage.`;
       }
 
       sendResponse(response);
