@@ -1,5 +1,6 @@
 window.browser = window.browser || window.chrome;
-const storage = chrome.storage.local;
+const crossStorage = browser.storage ||  chrome.storage;
+const storageMethod = crossStorage.sync;
 
 
 function saveTime(request) {
@@ -17,7 +18,7 @@ function saveTime(request) {
   console.log(request)
   const tempObj = {};
   tempObj[source] = request.currentTime
-  chrome.storage.local.set(tempObj);
+  storageMethod.set(tempObj);
 
   return response;
 }
@@ -54,7 +55,7 @@ function parseUrl(url) {
 
 function getStorageValuePromise(key) {
   return new Promise((resolve) => {
-    storage.get(key, resolve);
+    storageMethod.get(key, resolve);
   });
 }
 
@@ -100,10 +101,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 
-chrome.storage.onChanged.addListener((changes, namespace) => {
+crossStorage.onChanged.addListener((changes, namespace) => {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     console.log(
-      `Storage key "${key}" in namespace "${namespace}" changed.`,
+      `storageMethod key "${key}" in namespace "${namespace}" changed.`,
       `Old value was "${oldValue}", new value is "${newValue}".`
     );
   }

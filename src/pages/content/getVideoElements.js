@@ -1,36 +1,37 @@
-console.log("hippies");
+console.log("monkeypatching audio and video play");
 
 const audioPlay = HTMLAudioElement.prototype.play
-HTMLAudioElement.prototype.audioPlay = audioPlay;
-HTMLAudioElement.prototype.play = function() {
-    sendElement("load", this);
-    this.audioPlay();
+HTMLAudioElement.prototype.actualPlay = audioPlay;
+HTMLAudioElement.prototype.play = function(noEvent=false) {
+    if (noEvent) {
+        sendElement("load", this);
+        this.dispatchEvent(new Event("play"));
+    }
+
+    this.actualPlay();
 }
 
 const videoPlay = HTMLVideoElement.prototype.play;
-HTMLVideoElement.prototype.videoPlay = videoPlay;
-HTMLVideoElement.prototype.play = function() {
-    sendElement("load", this);
-    this.videoPlay();
+HTMLVideoElement.prototype.actualPlay = videoPlay;
+HTMLVideoElement.prototype.play = function(noEvent=false) {
+    if (noEvent) {
+        sendElement("load", this);
+        this.dispatchEvent(new Event("play"));
+    }
+
+    this.actualPlay();
 }
 
 
-async function sendMessageAsync(message) {
-    return await chrome.runtime.sendMessage(message, (response) => {
-        resolve(response);
-        });
-    // });
-}
-
-
-function sendElement(action, mediaElement) {
+function sendElement(action, mediaElement) { 
     let src = mediaElement.src;
     if (src == "") {
         var source = mediaElement.querySelector("source");
         if (source) src = source.src;
     }
-
+    
     if (!src) return;
+    console.log(src)
 
     const message = {
         "action": action,
@@ -41,7 +42,7 @@ function sendElement(action, mediaElement) {
     };
 
     chrome.runtime.sendMessage(message, (response) => {
-        console.log("response", response);
+        console.log(response);
         
         if (!response) return;
         if (!response.success) return;
@@ -55,20 +56,24 @@ function sendElement(action, mediaElement) {
 
 
 document.querySelectorAll("video, audio").forEach(mediaElement => {
+    let alreadyLoaded = false;
     sendElement("load", mediaElement);
     
     mediaElement.onplay = function(event) {
         event.preventDefault()
         mediaElement.play();
     }
+    
+    mediaElement.addEventListener("play", (event) => {
+        if (alreadyLoaded) return;
 
-    mediaElement.addEventListener("play", event => {
-        event.preventDefault();
-        mediaElement.play();
+        alreadyLoaded = true;
+        sendElement("load", mediaElement);
     })
 
     mediaElement.addEventListener("timeupdate", function(event) {
         if (mediaElement.paused) return;
+        if (!alreadyLoaded) return;
         sendElement("save", event.currentTarget);
     });
 });
