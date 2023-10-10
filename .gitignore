@@ -2,3 +2,5 @@ web-ext-artifacts/
 .DS_Store
 nod
 node_modules
+key.pem
+dist
