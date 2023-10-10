@@ -2,29 +2,6 @@ window.browser = window.browser || window.chrome;
 const storage = chrome.storage.local;
 
 
-async function loadTime(request, sendResponse) {
-  const response = {
-    success: false
-  };
-
-  const source = parseUrl(request.src);
-  if (!source) {
-    response.success = false;
-    sendResponse(response);
-  }
-
-  chrome.storage.local.get([source], function(r) {
-    if (r[source]) {
-      response.success = true;
-      response.time = r[source];
-    }
-
-    sendResponse(response);
-  });
-
-
-}
-
 function saveTime(request) {
   const response = {
     success: true
@@ -75,16 +52,10 @@ function parseUrl(url) {
 }
 
 
-async function getStoredValue(key) {
-  const res = await new Promise((resolve, reject) => {
-      storage.get([key], (result) => {
-        console.log(result)
-        console.log(result[key])
-        resolve(result[key]);
-      });
+function getStorageValuePromise(key) {
+  return new Promise((resolve) => {
+    storage.get(key, resolve);
   });
-  console.log("in await", res)
-  return res;
 }
 
 
@@ -95,29 +66,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     success: false
   };
 
+  // error
   const source = parseUrl(message.src);
   if (!source) {
     console.log(response);
     sendResponse(response);
-    return;
+    return false;
   }
 
+  // saving synchronously
   if (message.action === "save") {
-    sendResponse(saveTime(message))
+    sendResponse(saveTime(message));
+    return false;
   }
-  else if (message.action === "load") {
-    try {
-      console.log(sendResponse);
-      // sendResponse(response)
-      
-      response.time = getStoredValue(source);
-      console.log(response)
-      response.success = true;
-    } catch (error) {
-      response.success = false;
-    }
-    sendResponse(response)
+
+  // loading asynchronously
+  if (message.action === "load") {
+    (async () => {
+      const res = await getStorageValuePromise(source);
+      if (source in res) {
+        response.time = res[source];
+        response.success = true;
+      }
+
+      sendResponse(response);
+    })();
+
+    return true;
   }
+  
+  console.error("action is not known", message);
+  return false;
 });
 
 
