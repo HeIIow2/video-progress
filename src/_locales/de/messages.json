@@ -16,7 +16,7 @@
     "description": "Toggle more extensive debug message."
   },
   "extensionDescription": {
-    "message": "Speichert, wie weit in einem Video geschaut wurde in den Cookies.",
+    "message": "Speichert, wie weit in einem Video geschaut wurde in den Extension Einstellungen.",
     "description": "Description of the extension."
   },
   "version": {

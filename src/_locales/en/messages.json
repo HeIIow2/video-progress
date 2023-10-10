@@ -16,7 +16,7 @@
     "description": "Toggle more extensive debug message."
   },
   "extensionDescription": {
-    "message": "Saves, how long a video has been watched in the browser Cookies.",
+    "message": "Browser extension to save the progress of watched video and audio in browser sync.",
     "description": "Description of the extension."
   },
   "version": {

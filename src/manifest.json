@@ -14,7 +14,7 @@
       "page": "pages/background/background.html",
       "persistent": true
   },
-  "permissions": ["<all_urls>", "storage", "activeTab", "tabs", "nativeMessaging"],
+  "permissions": ["<all_urls>", "storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -24,7 +24,7 @@
   "web_accessible_resources": ["assets/javascripts/helpers/*"],
   "browser_specific_settings": {
     "gecko": {
-      "id": "addmefsdon@example.com",
+      "id": "c172922c-a2e7-4bcb-96de-1cce355615be",
       "strict_min_version": "42.0"
     }
   }
