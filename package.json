@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p dist && cd src && crx pack -o ../dist/video_progress.crx && crx pack --zip-output ../dist/video_progress.zip && cd ..",
-    "update-manifest-version": "node updateManifestVersion.js",
+    "update-manifest-version": "node tools/updateManifestVersion.js",
     "release": "release minor && npm run update-manifest-version && npm run build"
   },
   "repository": {
