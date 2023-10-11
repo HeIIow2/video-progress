@@ -1,19 +1,22 @@
 "use strict";
 
-let disableDebug = document.querySelector("#disable-debug");
+window.browser = window.browser || window.chrome;
+const crossStorage = chrome.storage || browser.storage;
+const storageMethod = crossStorage.local;
+
+let clearButton = document.querySelector("#clear-history");
 let version = document.querySelector("#version");
 
 window.browser = window.browser || window.chrome;
 
-browser.storage.sync.get(["disableDebug", "theme"], (result) => {
+storageMethod.get(["theme"], (result) => {
     if (result.theme) document.body.classList.add(result.theme);
-    disableDebug.checked = !result.disableDebug;
 });
 
 version.textContent = browser.runtime.getManifest().version;
 
-disableDebug.addEventListener("change", (event) => {
-    browser.storage.sync.set({ disableDebug: !event.target.checked });
+clearButton.addEventListener("click", (event) => {
+    storageMethod.clear();
 });
 
 

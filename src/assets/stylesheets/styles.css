@@ -542,4 +542,8 @@ body {
     box-shadow: 0 0 1px var(--bg-secondary);
     font-weight: bold;
   }
+
+  svg {
+    color: var(--text)
+  }
   

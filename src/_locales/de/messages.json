@@ -22,5 +22,9 @@
   "version": {
     "message": "Version",
     "description": "Version"
+  },
+  "clearHistory": {
+    "message": "Löschen des Verlaufs",
+    "description": "Deletes all saved videos."
   }
 }
