@@ -1,0 +1,27 @@
+{
+  "name": "video_progress",
+  "version": "1.0.0",
+  "description": "Browser extension to save the progress of watched video and audio in browser sync.",
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p dist && cd src && crx pack -o ../dist/video_progress.crx --zip-output ../dist/video_progress.zip && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeIIow2/video-progress.git"
+  },
+  "keywords": [
+    "browser extension",
+    "video",
+    "media"
+  ],
+  "author": "Hazel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HeIIow2/video-progress/issues"
+  },
+  "homepage": "https://github.com/HeIIow2/video-progress#readme",
+  "dependencies": {
+    "crx": "^5.0.1"
+  }
+}
