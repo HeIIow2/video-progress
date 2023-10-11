@@ -4,7 +4,7 @@
   "description": "Browser extension to save the progress of watched video and audio in browser sync.",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && cd src && crx pack -o ../dist/video_progress.crx --zip-output ../dist/video_progress.zip && cd ..",
+    "build": "mkdir -p dist && cd src && crx pack -o ../dist/video_progress.crx && crx pack --zip-output ../dist/video_progress.zip && cd ..",
     "release": "npm run build && release minor"
   },
   "repository": {
