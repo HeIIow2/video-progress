@@ -1,11 +1,11 @@
 {
   "name": "video_progress",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Browser extension to save the progress of watched video and audio in browser sync.",
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p dist && cd src && crx pack -o ../dist/video_progress.crx && crx pack --zip-output ../dist/video_progress.zip && cd ..",
-    "release": "npm run build && release minor"
+    "release": "release minor && webpack-manifest-version-sync-plugin && npm run build"
   },
   "repository": {
     "type": "git",
