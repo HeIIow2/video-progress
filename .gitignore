@@ -4,3 +4,4 @@ nod
 node_modules
 key.pem
 dist
+.vscode
